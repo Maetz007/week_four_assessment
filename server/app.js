@@ -5,6 +5,7 @@ var pg = require("pg");
 var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 var connectionString = 'postgres://localhost:5432/animalDatabase';
+var randomGenerator = require("../modules/randomGenerator");
 
 app.use( express.static("public"));
 
@@ -19,7 +20,7 @@ app.get("/", function(req, res){
 
 app.post("/addAnimal", urlencodedParser, function(req, res){
   pg.connect( connectionString, function( err, client, done ){
-    client.query("INSERT INTO animals (animal_type, num_animals) VALUES ($1, $2);", [req.body.animalbOj, req.body.randomNumObj]);
+    client.query("INSERT INTO animals (animal_type, num_animals) VALUES ($1, $2);", [req.body.animalbOj, randomGenerator()]);
   }); // end pg.connect
   res.send("res success");
 }); // end /addAnimal

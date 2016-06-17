@@ -4,21 +4,18 @@ $(document).ready(function(){
 
 $("#addAnimalBtn").on("click", function(){
   var newAnimal = $("#animalInput").val();
-  var randomNum = randomNumber(1, 100);
   var empty = "";
     if (newAnimal == empty){
       alert("Zoo doesn't accept invisible animals!");
   } else {
     var animalObject = {
       "animalbOj": newAnimal,
-      "randomNumObj": randomNum,
   }; // end task object
     $.ajax({
       type: "POST",
       url: "/addAnimal",
       data: animalObject,
       success: function(){
-        document.getElementById("animalZoo").innerHTML = "";
         animalsDisplay();
       } // end success
     }); // end ajax
@@ -28,6 +25,7 @@ $("#addAnimalBtn").on("click", function(){
 //------------------------------------------------------------------------------------------------------------------
 
 function animalsDisplay(){
+  document.getElementById("animalZoo").innerHTML = "";
     $.ajax({
       type: "GET",
       url: "/getAllAnimals",
@@ -49,7 +47,5 @@ $("#loadAnimals").on("click", function(){
 });
 
 //------------------------------------------------------------------------------------------------------------------
-
-function randomNumber(min, max){ return Math.floor(Math.random() * (1 + max - min) + min); }
 
 }); // end document ready
