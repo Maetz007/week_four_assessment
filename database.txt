@@ -1,0 +1,5 @@
+CREATE TABLE animals (
+id SERIAL PRIMARY KEY NOT NULL,
+animal_type VARCHAR(24),
+num_animals INT
+)
